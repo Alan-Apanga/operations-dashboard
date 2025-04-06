@@ -358,7 +358,7 @@ def plot_lead_time_distribution(df, year):
 
 
 
-col = st.columns((2, 4.5, 2), gap='medium')
+col = st.columns((2, 4.5, 3), gap='medium')
 
 
 
