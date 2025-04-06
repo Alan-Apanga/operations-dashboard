@@ -452,7 +452,7 @@ with col[1]:
 
 
 with col[2]:
-    st.markdown("<h4 style='text-align: center;'><u>Extras</u></h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center;'><u>More Information</u></h4>", unsafe_allow_html=True)
     
     with st.expander('About', expanded=True):
         st.write('''
