@@ -456,7 +456,7 @@ with col[2]:
     
     with st.expander('About', expanded=True):
         st.write('''
-            - Inventory: Assumed to be of latest period `2023`.
+            - Inventory: Assumed to be of full year `period`.
             - :orange[**Missing Data**]: `actualShipDate` used instead of `shipDate` to calculate `Outbound On-Time Rate` for the selected year. Negative values indicate that the item was shipped earlier than expected.
             - :orange[**Inbound Lead Time**]: Calculated using `createdDate` and `tranDate` from purchase orders data.
             - :orange[**Filtering**]: Data is filtered for the **selected year**.
