@@ -358,7 +358,7 @@ def plot_lead_time_distribution(df, year):
 
 
 
-col = st.columns((2, 4.5, 3), gap='medium')
+col = st.columns((2, 4.5, 2.5), gap='medium')
 
 
 
@@ -421,7 +421,7 @@ with col[0]:
         avg_lead_time = '-'
 
     
-    st.metric(label="Inbound Average Lead Time in Hours", value=avg_lead_time, delta=None )
+    st.metric(label="Inbound Average Lead Time (Hrs)", value=avg_lead_time, delta=None )
 
 #%%
     
