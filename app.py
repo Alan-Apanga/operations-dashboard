@@ -495,7 +495,7 @@ with col[1]:
     
     
     # Average Lead Time
-    lead_time = average_leadtime_calc(df_shipments, selected_year)
+    lead_time = average_leadtime_calc(df_orders, selected_year)
     if lead_time is None or rate < 0:
         ontime_delivery_rate = '-'  # Prevent errors
         
@@ -506,7 +506,7 @@ with col[1]:
         avg_lead_time = '-'
 
     
-    st.metric(label="Inbound Average Lead Time (Hrs)", value=avg_lead_time, delta=None )
+    st.metric(label="Inbound Average Lead Time (Days)", value=avg_lead_time, delta=None )
 
     
     
