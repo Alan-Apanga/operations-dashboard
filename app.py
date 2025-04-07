@@ -529,7 +529,7 @@ with col[1]:
     with st.expander('About', expanded=True):
         st.write('''
             - Inventory: Assumed to be of full year `period`.
-            - :orange[**Missing Data**]: `actualShipDate` used instead of `shipDate` to calculate `Outbound On-Time Rate` for the selected year. 
+            - :orange[**Missing Data**]: `ShipDate` used instead of `actualShipDate` to calculate `Outbound On-Time Rate` for the selected year. 
             - :orange[**Negative Outbound values**]: Implies that the item was shipped earlier than expected.
             - :orange[**Outbound Delivery Delay**]: Calculated using `shipDate` and `expectedReceiptDate` from sales orders data.
             - :orange[**Outbound On-Time Planned Delivery Rate**]: Reflects alignment with planned schedules, not confirmed on-time deliveries, reason-missing `actual shipping dates`.
