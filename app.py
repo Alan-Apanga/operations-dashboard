@@ -239,7 +239,7 @@ def average_delay_calc(df_shipments, year):
 
     # Drop rows where delay_time is NaT (due to missing dates)
     df_valid = df_filtered[df_filtered['delay_time'].notna()]
-    df_valid = df_valid[df_valid['delay_time'] >= 0]
+    #df_valid = df_valid[df_valid['delay_time'] >= 0]
 
     if df_valid.empty:
         return 0.0
