@@ -489,6 +489,8 @@ with col[1]:
     st.markdown('#### <u>KPI</u>', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)  # Spacing
     
+    
+    selected_year = int(selected_year)
     order_fulfillment_rate = fulfillment_rate_calc(df_shipments, selected_year)
     
     if order_fulfillment_rate is None or order_fulfillment_rate < 0:
