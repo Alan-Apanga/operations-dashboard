@@ -529,7 +529,6 @@ with col[1]:
             - :orange[**Negative Lead time**]: Implies that the item was shipped earlier than expected.
             - :orange[**Inbound Lead Time**]: Calculated using `createdDate` and `tranDate` from purchase orders data.
             - :orange[**Outbound On-Time Delivery Rate**]: Reflects alignment with planned schedules, not confirmed on-time deliveries, reason-missing `actual shipping dates`.
-.
             - :orange[**Filtering**]: Data is filtered for the **selected year**.
         ''')
 
