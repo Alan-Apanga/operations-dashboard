@@ -472,7 +472,11 @@ with col[1]:
     
     st.metric(label="Outbound Fulfillment Rate", value=fulfillment_rate, delta=None )
     
-
+    
+    
+    st.markdown("<br>", unsafe_allow_html=True)  # Spacing
+    
+    
     
     
     # On-Time Delivery Rate
@@ -487,7 +491,7 @@ with col[1]:
         ontime_delivery_rate = '-'
 
     
-    st.metric(label="Outbound On-Time Delivery Rate", value=ontime_delivery_rate, delta=None )
+    st.metric(label="Outbound On-Time Planned Delivery Rate", value=ontime_delivery_rate, delta=None )
         
     
     st.markdown("<br>", unsafe_allow_html=True)  # Spacing
