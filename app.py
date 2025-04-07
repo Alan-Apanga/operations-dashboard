@@ -358,12 +358,101 @@ def plot_lead_time_distribution(df, year):
 
 
 
-col = st.columns((2, 4.5, 2.5), gap='medium')
+col = st.columns((5.5, 3.5), gap='medium')
 
 
+
+# with col[0]:
+       
+    # # Fulfillment Rate
+    # st.markdown('#### <u>KPI</u>', unsafe_allow_html=True)
+    # order_fulfillment_rate = fulfillment_rate_calc(df_shipments, selected_year)
+    
+    # if order_fulfillment_rate is None or order_fulfillment_rate < 0:
+    #     fulfillment_rate = '-'  # Prevent errors
+        
+    # elif selected_year > 2021:
+    #     fulfillment_rate = format_number(order_fulfillment_rate, "percentage")
+        
+    # else:
+    #     fulfillment_rate = '-'
+
+    
+    # st.metric(label="Outbound Fulfillment Rate", value=fulfillment_rate, delta=None )
+    
+    
+    
+    # st.markdown("<br>", unsafe_allow_html=True)  # Spacing
+        
+     
+    
+    
+    
+    # # On-Time Delivery Rate
+    # rate = ontime_rate_calc(df_shipments, selected_year)
+    # if rate is None or rate < 0:
+    #     ontime_delivery_rate = '-'  # Prevent errors
+        
+    # elif selected_year > 2021:
+    #     ontime_delivery_rate = format_number(rate, "percentage")
+        
+    # else:
+    #     ontime_delivery_rate = '-'
+
+    
+    # st.metric(label="Outbound On-Time Delivery Rate", value=ontime_delivery_rate, delta=None )
+        
+    
+    # st.markdown("<br>", unsafe_allow_html=True)  # Spacing
+    
+    
+    
+    
+    
+    # # Average Lead Time
+    # lead_time = average_leadtime_calc(df_shipments, selected_year)
+    # if lead_time is None or rate < 0:
+    #     ontime_delivery_rate = '-'  # Prevent errors
+        
+    # elif selected_year > 2021:
+    #     avg_lead_time = format_number(lead_time, "hours")
+        
+    # else:
+    #     avg_lead_time = '-'
+
+    
+    # st.metric(label="Inbound Average Lead Time (Hrs)", value=avg_lead_time, delta=None )
+
+#%%
+    
 
 with col[0]:
-       
+    # st.markdown('#### Inventory Levels')
+    st.markdown("<h4 style='text-align: center;'><u>Inventory Level</u></h4>", unsafe_allow_html=True)
+    
+    if selected_year > 2021: 
+        bar_chart = plot_inventory(df_inventory, year_list)
+        st.altair_chart(bar_chart, use_container_width=True)
+    
+    else:
+        st.error("Please select a valid year from the list in the sidebar.")
+
+    
+    
+    #st.markdown("<br>", unsafe_allow_html=True)  # Spacing
+    st.markdown("<hr>", unsafe_allow_html=True)
+
+    chart = plot_lead_time_distribution(df_orders, selected_year)
+    
+    if chart and (selected_year > 2021):
+        st.altair_chart(chart, use_container_width=True)
+   
+
+#%%
+
+
+with col[1]:
+    
     # Fulfillment Rate
     st.markdown('#### <u>KPI</u>', unsafe_allow_html=True)
     order_fulfillment_rate = fulfillment_rate_calc(df_shipments, selected_year)
@@ -423,35 +512,16 @@ with col[0]:
     
     st.metric(label="Inbound Average Lead Time (Hrs)", value=avg_lead_time, delta=None )
 
-#%%
-    
-
-with col[1]:
-    # st.markdown('#### Inventory Levels')
-    st.markdown("<h4 style='text-align: center;'><u>Inventory Level</u></h4>", unsafe_allow_html=True)
-    
-    if selected_year > 2021: 
-        bar_chart = plot_inventory(df_inventory, year_list)
-        st.altair_chart(bar_chart, use_container_width=True)
-    
-    else:
-        st.error("Please select a valid year from the list in the sidebar.")
-
     
     
-    #st.markdown("<br>", unsafe_allow_html=True)  # Spacing
-    st.markdown("<hr>", unsafe_allow_html=True)
-
-    chart = plot_lead_time_distribution(df_orders, selected_year)
     
-    if chart and (selected_year > 2021):
-        st.altair_chart(chart, use_container_width=True)
-   
-
-#%%
-
-
-with col[2]:
+    
+    st.markdown("<br>", unsafe_allow_html=True)  # Spacing
+    
+    
+    
+    
+    
     st.markdown("<h4 style='text-align: center;'><u>More Information</u></h4>", unsafe_allow_html=True)
     
     with st.expander('About', expanded=True):
