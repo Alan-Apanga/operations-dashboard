@@ -101,14 +101,14 @@ with st.sidebar:
     
     
     # Convert tranDate column to datetime format for filtering
-    # df_orders['createdDate'] = pd.to_datetime(df_orders['createdDate'], errors='coerce')
-    # df_orders['tranDate'] = pd.to_datetime(df_orders['tranDate'], errors='coerce')
-    # df_orders['plannedDate'] = pd.to_datetime(df_orders['plannedDate'], errors='coerce')
+    df_orders['createdDate'] = pd.to_datetime(df_orders['createdDate'], errors='coerce')
+    df_orders['tranDate'] = pd.to_datetime(df_orders['tranDate'], errors='coerce')
+    df_orders['plannedDate'] = pd.to_datetime(df_orders['plannedDate'], errors='coerce')
     
-    # df_shipments['createdDate'] = pd.to_datetime(df_shipments['createdDate'], errors='coerce')
-    # df_shipments['tranDate'] = pd.to_datetime(df_shipments['tranDate'], errors='coerce')
-    # df_shipments['expectedReceiptDate'] = pd.to_datetime(df_shipments['expectedReceiptDate'], errors='coerce')
-    # df_shipments['shipDate'] = pd.to_datetime(df_shipments['shipDate'], errors='coerce')
+    df_shipments['createdDate'] = pd.to_datetime(df_shipments['createdDate'], errors='coerce')
+    df_shipments['tranDate'] = pd.to_datetime(df_shipments['tranDate'], errors='coerce')
+    df_shipments['expectedReceiptDate'] = pd.to_datetime(df_shipments['expectedReceiptDate'], errors='coerce')
+    df_shipments['shipDate'] = pd.to_datetime(df_shipments['shipDate'], errors='coerce')
 
     
     
