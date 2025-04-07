@@ -235,6 +235,9 @@ def average_leadtime_calc(df_orders, year):
 
     # Drop rows where delay_time is NaT (due to missing dates)
     df_valid = df_filtered[df_filtered['planned_lead_time'].notna()]
+    
+    # to drop rows where planned_lead_time is negative
+    df_valid = df_valid[df_valid['planned_lead_time'] >= 0]
 
     if df_valid.empty:
         return 0.0
