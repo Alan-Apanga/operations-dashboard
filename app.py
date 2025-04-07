@@ -335,7 +335,7 @@ def plot_lead_time_distribution(df, year):
     ).properties(
         width=600,
         height=400,
-        title=f'For Orders in {year}'
+        title=f'For Shipments in {year}'
     )
 
     return chart
