@@ -232,7 +232,7 @@ def average_leadtime_calc(df_shipments, year):
     df_filtered = df_shipments[df_shipments['tranDate'].dt.year == year]
 
     if df_filtered.empty:
-        return 0.0  # Avoid division by zero if no data
+        return 0.0  # Avoids division by zero if no data
 
     # Calculate delay time (as timedelta)
     df_filtered['delay_time'] = df_filtered['shipDate'] - df_filtered['expectedReceiptDate']
@@ -281,7 +281,7 @@ def plot_inventory(df, period):
     ).properties(
         width=600,
         height=400,
-        title=f'Period of {period[0]} '
+        title=f'Period of {period} '
     )
     
     text = chart.mark_text(
@@ -431,7 +431,7 @@ with col[0]:
     st.markdown("<h4 style='text-align: center;'><u>Inventory Level</u></h4>", unsafe_allow_html=True)
     
     if selected_year > 2021: 
-        bar_chart = plot_inventory(df_inventory, year_list)
+        bar_chart = plot_inventory(df_inventory, selected_year)
         st.altair_chart(bar_chart, use_container_width=True)
     
     else:
