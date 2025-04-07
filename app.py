@@ -35,9 +35,9 @@ dfs = [pd.read_csv(file) for file in csv_files]
 
 
 # Assuming dfs is a list containing the DataFrames
-df_inventory = dfs[0]  # Inventory Data
-df_orders = dfs[2]  # Purchase Order Data
-df_shipments = dfs[3]  # Shipment Data
+# df_inventory = dfs[0]  # Inventory Data
+# df_orders = dfs[2]  # Purchase Order Data
+# df_shipments = dfs[3]  # Shipment Data
 
 # df_shipments['tranDate'] = pd.to_datetime(df_shipments['tranDate'], errors='coerce')
 # df_valid = df_shipments[df_shipments['tranDate'].notna()]
@@ -47,6 +47,24 @@ df_shipments = dfs[3]  # Shipment Data
 
 # print("Minimum Year:", min_year)
 # print("Maximum Year:", max_year)
+
+
+
+# # Ensure relevant date columns are datetime
+# date_columns = ['createdDate', 'tranDate', 'expectedReceiptDate', 'shipDate']
+# for col in date_columns:
+#     if col in df_shipments.columns:
+#         df_shipments[col] = pd.to_datetime(df_shipments[col], errors='coerce')
+
+# df_filtered = df_shipments[df_shipments['tranDate'].dt.year == 2023]
+# df_filtered['delay_time'] = df_filtered['shipDate'] - df_filtered['expectedReceiptDate']
+# df_valid = df_filtered[df_filtered['delay_time'].notna()]
+
+# # Debug
+# print("Filtered rows for year:", len(df_filtered))
+# print("Valid delay rows:", len(df_valid))
+# print("Delay time sample:", df_valid['delay_time'].head())
+
 
 # check for duplicates
 # df_inventory.duplicated().sum() 
@@ -252,11 +270,6 @@ def average_delay_calc(df_shipments, year):
     df_valid = df_filtered[df_filtered['delay_time'].notna()]
     #df_valid = df_valid[df_valid['delay_time'] >= 0]
     
-    
-    # Debug
-    print("Filtered rows for year:", len(df_filtered))
-    print("Valid delay rows:", len(df_valid))
-    print("Delay time sample:", df_valid['delay_time'].head())
     
 
     if df_valid.empty:
