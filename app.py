@@ -335,7 +335,7 @@ def plot_lead_time_distribution(df, year):
     ).properties(
         width=600,
         height=400,
-        title=f'Lead Time Distribution for Orders in {year}'
+        title=f'For Orders in {year}'
     )
 
     return chart
@@ -444,6 +444,7 @@ with col[0]:
 
     chart = plot_lead_time_distribution(df_orders, selected_year)
     
+    st.markdown("<h4 style='text-align: center;'><u>Lead Time Distribution</u></h4>", unsafe_allow_html=True)
     if chart and (selected_year > 2021):
         st.altair_chart(chart, use_container_width=True)
    
