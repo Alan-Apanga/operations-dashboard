@@ -299,7 +299,7 @@ def plot_inventory(df, period):
 #%%
 
 
-def plot_lead_time_distribution(df, year):
+def plot_order_topay_cycle_time_distribution(df_orders, year):
     """
     Filters data for a given year and plots the lead time distribution using Altair.
 
@@ -311,31 +311,31 @@ def plot_lead_time_distribution(df, year):
     alt.Chart: An Altair chart showing lead time distribution.
     """
     # Ensure datetime format
-    df['createdDate'] = pd.to_datetime(df['createdDate'], errors='coerce')
-    df['tranDate'] = pd.to_datetime(df['tranDate'], errors='coerce')
+    df_orders['createdDate'] = pd.to_datetime(df_orders['createdDate'], errors='coerce')
+    df_orders['tranDate'] = pd.to_datetime(df_orders['tranDate'], errors='coerce')
 
     # Filter by year
-    df_year = df[df['createdDate'].dt.year == year].copy()
+    df_year = df_orders[df_orders['createdDate'].dt.year == year].copy()
 
     # Compute lead time
-    df_year['leadTime'] = (df_year['tranDate'] - df_year['createdDate']).dt.days
+    df_year['Order_to_payment_time'] = (df_year['tranDate'] - df_year['createdDate']).dt.days
 
     # Drop rows with missing or negative lead times
-    df_clean = df_year.dropna(subset=['leadTime'])
-    df_clean = df_clean[df_clean['leadTime'] >= 0]
+    df_clean = df_year.dropna(subset=['Order_to_payment_time'])
+    df_clean = df_clean[df_clean['Order_to_payment_time'] >= 0]
 
     if df_clean.empty:
-        print(f"No valid lead time data for the year {year}.")
+        print(f"No valid Purchase Order data for the year {year}.")
         return None
 
     # Altair histogram
     chart = alt.Chart(df_clean).mark_bar(color='steelblue').encode(
-        alt.X('leadTime:Q', bin=alt.Bin(maxbins=20), title='Lead Time (Days)'),
+        alt.X('Order_to_payment_time:Q', bin=alt.Bin(maxbins=20), title='Procurement Cycle Time (Days)'),
         alt.Y('count()', title='Frequency')
     ).properties(
         width=600,
         height=400,
-        title=f'For Shipments in {year}'
+        title=f'For Orders in {year}'
     )
 
     return chart
@@ -442,7 +442,7 @@ with col[0]:
     #st.markdown("<br>", unsafe_allow_html=True)  # Spacing
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    chart = plot_lead_time_distribution(df_orders, selected_year)
+    chart = plot_order_topay_cycle_time_distribution(df_orders, selected_year)
     
     st.markdown("<h4 style='text-align: center;'><u>Lead Time Distribution</u></h4>", unsafe_allow_html=True)
     if chart and (selected_year > 2021):
