@@ -358,7 +358,7 @@ def plot_lead_time_distribution(df, year):
 
 
 
-col = st.columns((5.5, 3.5), gap='medium')
+# col = st.columns((5.5, 3.5), gap='medium')
 
 
 
@@ -424,7 +424,7 @@ col = st.columns((5.5, 3.5), gap='medium')
     # st.metric(label="Inbound Average Lead Time (Hrs)", value=avg_lead_time, delta=None )
 
 #%%
-    
+col = st.columns((5.5, 3.5), gap='medium')
 
 with col[0]:
     # st.markdown('#### Inventory Levels')
