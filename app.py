@@ -194,10 +194,14 @@ def ontime_rate_calc(df_shipments, year):
     # Filter data for the given year based on `tranDate`
     df_filtered = df_shipments[df_shipments['tranDate'].dt.year == year]
     
+    # Drop rows with missing comparison values
+    df_filtered = df_filtered.dropna(subset=['shipDate', 'expectedReceiptDate'])
+
+    
     if df_filtered.empty:
         return 0.0  # Avoid division by zero if no data
     
-    # Calculate on-time delivery rate (avoiding NaT issues)
+    # Calculate on-time flag
     df_filtered['on_time'] = df_filtered['shipDate'] <= df_filtered['expectedReceiptDate']
     
     on_time_rate = (df_filtered['on_time'].sum() / len(df_filtered)) * 100
