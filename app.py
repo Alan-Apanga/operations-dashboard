@@ -39,7 +39,14 @@ df_inventory = dfs[0]  # Inventory Data
 df_orders = dfs[2]  # Purchase Order Data
 df_shipments = dfs[3]  # Shipment Data
 
+# df_shipments['tranDate'] = pd.to_datetime(df_shipments['tranDate'], errors='coerce')
+# df_valid = df_shipments[df_shipments['tranDate'].notna()]
+# # Extract year and find min & max
+# min_year = df_valid['tranDate'].dt.year.min()
+# max_year = df_valid['tranDate'].dt.year.max()
 
+# print("Minimum Year:", min_year)
+# print("Maximum Year:", max_year)
 
 # check for duplicates
 # df_inventory.duplicated().sum() 
@@ -227,10 +234,10 @@ def average_delay_calc(df_shipments, year):
     """
 
     # Ensure relevant date columns are datetime
-    # date_columns = ['createdDate', 'tranDate', 'expectedReceiptDate', 'shipDate']
-    # for col in date_columns:
-    #     if col in df_shipments.columns:
-    #         df_shipments[col] = pd.to_datetime(df_shipments[col], errors='coerce')
+    date_columns = ['createdDate', 'tranDate', 'expectedReceiptDate', 'shipDate']
+    for col in date_columns:
+        if col in df_shipments.columns:
+            df_shipments[col] = pd.to_datetime(df_shipments[col], errors='coerce')
 
     # Filter by year based on tranDate
     df_filtered = df_shipments[df_shipments['tranDate'].dt.year == year]
