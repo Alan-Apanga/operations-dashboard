@@ -183,7 +183,7 @@ def format_number(num, unit=None):
 
 #%%
 
-def on_rate_calc(df_shipments, year):
+def ontime_rate_calc(df_shipments, year):
     
     # Ensure date columns are in datetime format
     date_columns = ['createdDate', 'tranDate', 'expectedReceiptDate', 'shipDate']
@@ -389,7 +389,7 @@ with col[0]:
     
     
     # On-Time Delivery Rate
-    rate = on_rate_calc(df_shipments, selected_year)
+    rate = ontime_rate_calc(df_shipments, selected_year)
     if rate is None or rate < 0:
         ontime_delivery_rate = '-'  # Prevent errors
         
