@@ -268,7 +268,7 @@ def average_delay_calc(df_shipments, year):
         return 0.0  # Avoid division by zero if no data
 
     # Calculate delay time (as timedelta)
-    df_filtered['delay_time'] = df_filtered['expectedReceiptDate'] - df_filtered['shipDate'] 
+    df_filtered['delay_time'] = df_filtered['shipDate'] - df_filtered['expectedReceiptDate']  
 
     # Drop rows where delay_time is NaT (due to missing dates)
     df_valid = df_filtered[df_filtered['delay_time'].notna()]
