@@ -280,8 +280,8 @@ def average_delay_calc(df_shipments, year):
         return 0.0
 
     # Compute average lead time in hours
-    # avg_lead_time_hours = df_valid['delay_time'].mean().total_seconds() / 3600
-    avg_lead_time_hours = df_valid['delay_time'].mean().days()
+    avg_lead_time_hours = df_valid['delay_time'].mean().total_seconds() / 3600
+    
 
 
     return round(avg_lead_time_hours, 2)
