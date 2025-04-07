@@ -471,12 +471,7 @@ with col[1]:
     
     st.metric(label="Outbound Fulfillment Rate", value=fulfillment_rate, delta=None )
     
-    
-    
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # Spacing
-        
-     
-    
+
     
     
     # On-Time Delivery Rate
@@ -518,7 +513,7 @@ with col[1]:
     
     
     
-    st.markdown("<br>", unsafe_allow_html=True)  # Spacing
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # Spacing
     
     
     
