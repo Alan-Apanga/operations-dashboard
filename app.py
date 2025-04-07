@@ -471,7 +471,7 @@ with col[1]:
     
     
     
-    st.markdown("<br><br>", unsafe_allow_html=True)  # Spacing
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # Spacing
         
      
     
