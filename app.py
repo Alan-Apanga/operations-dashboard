@@ -444,7 +444,7 @@ with col[0]:
 
     chart = plot_order_topay_cycle_time_distribution(df_orders, selected_year)
     
-    st.markdown("<h4 style='text-align: center;'><u>Procurement Cycle Time (Order-to-Payment Duration)</u></h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center;'><u>Order-to-Payment Duration</u></h4>", unsafe_allow_html=True)
     if chart and (selected_year > 2021):
         st.altair_chart(chart, use_container_width=True)
    
