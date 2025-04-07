@@ -210,45 +210,44 @@ def ontime_rate_calc(df_shipments, year):
 
 
 
-def average_leadtime_calc(df_orders, year):
+def average_delay_calc(df_shipments, year):
     """
-    Calculate the average lead time (in hours) for a given year.
+    Calculate the average shipment delay time (in hours) for a given year.
 
     Parameters:
-    - df_orders (DataFrame): Purchase Order Data
+    - df_shipments (DataFrame): Shipment data
     - year (int): Year to filter the data by tranDate
 
     Returns:
-    - float: Average lead time in hours 
+    - float: Average delay shipment time in hours (can be negative if shipped early)
     """
 
-   
+    # Ensure relevant date columns are datetime
+    # date_columns = ['createdDate', 'tranDate', 'expectedReceiptDate', 'shipDate']
+    # for col in date_columns:
+    #     if col in df_shipments.columns:
+    #         df_shipments[col] = pd.to_datetime(df_shipments[col], errors='coerce')
 
     # Filter by year based on tranDate
-    df_filtered = df_orders[df_orders['tranDate'].dt.year == year]
+    df_filtered = df_shipments[df_shipments['tranDate'].dt.year == year]
 
     if df_filtered.empty:
-        return 0.0  # Avoids division by zero if no data
+        return 0.0  # Avoid division by zero if no data
 
     # Calculate delay time (as timedelta)
-    df_filtered['planned_lead_time'] = (df_filtered['plannedDate'] - df_filtered['createdDate']).dt.days
+    df_filtered['delay_time'] = df_filtered['shipDate'] - df_filtered['expectedReceiptDate']
 
     # Drop rows where delay_time is NaT (due to missing dates)
-    df_valid = df_filtered[df_filtered['planned_lead_time'].notna()]
-    
-    # to drop rows where planned_lead_time is negative
-    df_valid = df_valid[df_valid['planned_lead_time'] >= 0]
+    df_valid = df_filtered[df_filtered['delay_time'].notna()]
+    df_valid = df_valid[df_valid['delay_time'] >= 0]
 
     if df_valid.empty:
         return 0.0
 
-    # Compute average lead time in days
-    #avg_lead_time_hours = df_valid['planned_lead_time'].mean().total_seconds() / 3600
-    avg_lead_time_days = df_valid['planned_lead_time'].mean()
+    # Compute average lead time in hours
+    avg_lead_time_hours = df_valid['delay_time'].mean().total_seconds() / 3600
 
-
-    return round(avg_lead_time_days, 2)
-
+    return round(avg_lead_time_hours, 2)
 #%%
 
 
@@ -498,7 +497,7 @@ with col[1]:
     
     
     # Average Lead Time
-    lead_time = average_leadtime_calc(df_orders, selected_year)
+    lead_time = average_delay_calc(df_shipments, selected_year)
     if lead_time is None or rate < 0:
         ontime_delivery_rate = '-'  # Prevent errors
         
@@ -509,7 +508,7 @@ with col[1]:
         avg_lead_time = '-'
 
     
-    st.metric(label="Inbound Average Lead Time (Days)", value=avg_lead_time, delta=None )
+    st.metric(label="Outbound Delivery Delay Average (Hrs)", value=avg_lead_time, delta=None )
 
     
     
@@ -528,7 +527,7 @@ with col[1]:
             - Inventory: Assumed to be of full year `period`.
             - :orange[**Missing Data**]: `actualShipDate` used instead of `shipDate` to calculate `Outbound On-Time Rate` for the selected year. 
             - :orange[**Negative Lead time**]: Implies that the item was shipped earlier than expected.
-            - :orange[**Inbound Lead Time**]: Calculated using `createdDate` and `tranDate` from purchase orders data.
+            - :orange[**Outbound Delivery Delay**]: Calculated using `shipDate` and `expectedReceiptDate` from sales orders data.
             - :orange[**Outbound On-Time Delivery Rate**]: Reflects alignment with planned schedules, not confirmed on-time deliveries, reason-missing `actual shipping dates`.
             - :orange[**Filtering**]: Data is filtered for the **selected year**.
         ''')
